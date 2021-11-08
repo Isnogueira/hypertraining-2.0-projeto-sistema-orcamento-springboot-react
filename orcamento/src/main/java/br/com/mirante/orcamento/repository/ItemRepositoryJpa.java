@@ -17,6 +17,7 @@ public class ItemRepositoryJpa implements ItemRepository{
 		this.entityManager = entityManager;
 	}
 	
+	
 	private EntityManager entityManager;
 	
 	@Override

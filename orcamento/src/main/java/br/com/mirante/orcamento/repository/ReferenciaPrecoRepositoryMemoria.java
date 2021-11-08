@@ -22,13 +22,3 @@ public class ReferenciaPrecoRepositoryMemoria implements ReferenciaPrecoReposito
 
 }
 
-/*
-"origem":"IBGE",
-            "codigo":"ABDC",
-            "descricao":"Feijão",
-            "valorUnitario":9.50,
-            "unidade":"kg",
-            "quantidade":5,
-            "valorTotalInformado":70
-
-*/

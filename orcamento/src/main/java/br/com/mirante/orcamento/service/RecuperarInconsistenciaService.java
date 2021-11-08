@@ -41,7 +41,7 @@ public class RecuperarInconsistenciaService {
 
 			ItemOrcamento itemOrcamento = itens.get(index);
 			int numeroItem = index + 1;
-			
+
 			inconsistenciasDoItem(inconsistencias, itemOrcamento, numeroItem, produtos);
 
 		}
@@ -59,11 +59,15 @@ public class RecuperarInconsistenciaService {
 
 		if (itemOrcamento.getValorTotalCalculado() != itemOrcamento.getValorTotalInformado()) {
 
-			inconsistencias.add("O valor total do item de id " + itemOrcamento.getId() + " deveria ser "
-					+ itemOrcamento.getValorTotalCalculado() + " mas foi "
-					+ itemOrcamento.getValorTotalInformado()
+			inconsistencias.add("O valor total do item de id " + itemOrcamento.getId() + " deveria ser R$"
+					+ itemOrcamento.getValorTotalCalculado() + " mas foi R$"
+					+ itemOrcamento.getValorTotalInformado());
+		}
 
-			);
+		if (itemOrcamento.getValorTotalCalculado() != itemOrcamento.getValorTotalInformado()) {
+			inconsistencias.add("O valor total do item de id " + numeroItem + " deveria ser R$"
+					+ itemOrcamento.getValorTotalCalculado() + " mas foi R$"
+					+ itemOrcamento.getValorTotalInformado());
 		}
 
 		if (produtos.containsKey(itemOrcamento.getCodigo())) {
@@ -74,10 +78,19 @@ public class RecuperarInconsistenciaService {
 						.add("A unidade do item numero " + numeroItem + "(" + itemOrcamento.getUnidade() + ")"
 								+ " diverge da unidade de referencia que é " + produto.getUnidade());
 			}
+
+			var valorTotalCalculadoReferencia = produto.getValorInformado() * itemOrcamento.getQuantidade();
+
+			if (itemOrcamento.getValorTotalCalculado() > valorTotalCalculadoReferencia) {
+				var valorSobrepreco = itemOrcamento.getValorTotalCalculado() - valorTotalCalculadoReferencia;
+				var percentual = valorSobrepreco / valorTotalCalculadoReferencia * 100;
+
+				inconsistencias
+						.add("O item numero " + numeroItem + "possui sobrepreco de R$ " + percentual + "%");
+			}
+
 		} else {
 			inconsistencias.add("O item " + numeroItem + " não possuiu uma referencia de preço valida");
-
-			// Verificar o sobrepreço.
 		}
 
 	}

@@ -28,7 +28,7 @@ function Orcamentos(props) {
 
 		const linhas = itensOrcamentoCsv.split('\n')
 
-		linhas.map((linha) => {
+		return	linhas.map((linha) => {
 			const atributos = linha.split(';')
 			return {
 				origem: atributos[0],

@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 
 function DetalharOrcamento(props) {
-	const [itensOrcamentos, setItensOrcamento] = React.useState([]);
+	const [itensOrcamento, setItensOrcamento] = React.useState([]);
 
 	React.useEffect(loadData, []);
 
@@ -55,14 +55,14 @@ function DetalharOrcamento(props) {
 					</tr>
 				</thead>
 				<tbody>
-					{itensOrcamentos.map((itemOrcamento, index) => (
+					{itensOrcamento.map((itemOrcamento, index) => (
 						<tr key={itemOrcamento.id}>
 							<td>{index + 1}</td>
 							<td>{itemOrcamento.origem}</td>
-							<td>{itemOrcamento.codigoItem}</td>
-							<td>{itemOrcamento.descricaoItem}</td>
+							<td>{itemOrcamento.codigo}</td>
+							<td>{itemOrcamento.descricao}</td>
 							<td>R$ {itemOrcamento.valorUnitario}</td>
-							<td>{itemOrcamento.unidadeMedida}</td>
+							<td>{itemOrcamento.unidade}</td>
 							<td>{itemOrcamento.quantidade}</td>
 							<td>R$ {itemOrcamento.valorTotalInformado}</td>
 						</tr>
